@@ -1,0 +1,26 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable apple
+drawable banana
+drawable brocolli
+drawable chicken_breast
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id food_category
+id food_image
+id food_name
+id main
+id person_image
+id person_name
+layout activity_main
+layout list_item_food
+layout list_item_person
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Base.Theme.MyApplication
+style Theme.MyApplication
+xml backup_rules
+xml data_extraction_rules
