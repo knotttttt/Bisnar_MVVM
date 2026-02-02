@@ -10,28 +10,29 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-// The MainActivity acts as the View.
 class MainActivity : AppCompatActivity() {
 
-    private val foodViewModel: FoodViewModel by viewModels()
+    private val viewModel: PersonViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val recyclerView = RecyclerView(this)
-        // You need to assign an ID to use findViewById later
-        recyclerView.id = View.generateViewId()
-        setContentView(recyclerView)
+        // Set the content view to your new layout file
+        setContentView(R.layout.activity_main)
 
+        // Find the RecyclerView from the layout
+        val recyclerView: RecyclerView = findViewById(R.id.people_recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        foodViewModel.foodItems.observe(this) { foodList ->
-            recyclerView.adapter = FoodAdapter(foodList)
+        viewModel.peopleItems.observe(this) { peopleList ->
+            recyclerView.adapter = PersonAdapter(peopleList)
         }
 
-        foodViewModel.loadFoodItems()
+        viewModel.loadPeople()
 
-        ViewCompat.setOnApplyWindowInsetsListener(recyclerView) { v, insets ->
+        // Apply window insets to the root LinearLayout
+        val mainLayout: View = findViewById(R.id.main_layout) // Get the root layout
+        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
